@@ -1,0 +1,18 @@
+#
+# Tasks using W3 Total Cache, a WordPress plugin
+# Depends on: WP-CLI
+#
+namespace :w3tc do
+	desc <<-DESC
+		Clear out the page cache created by W3 Total Cache
+		This task must be triggered AFTER the deployment to clear the page-enhanced cache
+    Usage: after :finishing, 'w3tc:clear_cache'
+	DESC
+  task :clear_cache do
+		on roles(:app) do
+      within fetch(:root_dir) do
+				execute :sudo, 'wp', 'w3-total-cache', 'flush'
+      end
+		end
+	end
+end

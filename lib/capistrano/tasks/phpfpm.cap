@@ -1,0 +1,14 @@
+#
+# Tasks for PHP-FPM
+#
+namespace :phpfpm do
+  desc <<-DESC
+    Restarts PHP-FPM
+    Usage: after :finishing, 'phpfpm:restart'
+  DESC
+	task :restart do
+		on roles(:app) do
+			execute :sudo, '/etc/init.d/php-fpm' 'restart'
+		end
+	end
+end

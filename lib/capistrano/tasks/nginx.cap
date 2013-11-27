@@ -1,0 +1,14 @@
+#
+# Tasks for dealing the webserver nginx
+#
+namespace :nginx do
+	desc <<-DESC
+	  Restart the nginx webserver
+    Usage: after :finishing, 'nginx:restart'
+  DESC
+	task :restart do
+		on roles(:app) do
+      execute :sudo, '/etc/init.d/nginx' 'reload'
+		end
+	end
+end

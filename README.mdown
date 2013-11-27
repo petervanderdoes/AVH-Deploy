@@ -1,0 +1,97 @@
+[wp]: http://wordpress.org/ "Official WordPress site"
+[wp-stack]: https://github.com/markjaquith/WP-Stack "Mark Jaquith's WP-Stack on GitHub"
+[rbenv]: https://github.com/sstephenson/rbenv "rbenv on GitHub"
+[capistrano-aa]: http://www.capistranorb.com/documentation/getting-started/authentication-and-authorisation/ "Authentication & Authorisation documentation by Capistrano"
+
+# AVH Deploy
+A toolkit for professional deployment using Capistrano v3.
+
+Parts of the documentation and some of the tasks are geared towards [WordPress][wp] plugin or theme deployments, but the toolkit can be used for almost all sort of deployments.
+
+This toolkit is based on the [WP Stack][wp-stack] deployment tool created by Mark Jaquith. His toolkit is for Capistrano v2 and is not compatible with the new Capistrano v3.
+
+## Why
+You should have a professional deployment for your software. You should be using:
+
+* Version control (like Git). It's actually mandatory for AVH Deploy.
+* A code deployment system (like Capistrano)
+* A staging environment to test changes before they go live
+
+Additionally, you should be able to easily scale out to multiple web servers, if needed.
+
+AVH Deploy is a toolkit that helps you do all that.
+
+## Capistrano
+
+Capistrano is a code deployment tool. When you have code that is ready to go "live", this is what does it.
+
+### Requirements
+
+#### Local system
+1. Ruby >= 1.9 (JRuby and C-Ruby/YARV are supported)
+1. Git
+
+#### Server
+1. Git
+
+#### Authentication setup
+I could not write it better myself, so just follow the [Authentication & Authorisation][capistrano-aa] instructions of Capistrano itself
+
+### Setup
+
+#### Local system
+1. Install Ruby. I personally recommend using [rbenv][rbenv], but choose the installation method you are comfortable with.
+1. Checkout AVH Deploy `git clone git@github.com:petervanderdoes/AVH-Deploy.git /opt/avh-deploy`
+1. Go to the directory you checked out AVH Deploy and run `bundle install`
+1. Rename `config/deploy/{production|staging}_template.rb` to `config/deploy/{production|staging}.rb`
+1. Rename `config/deploy_template.rb` to `config/deploy.rb`
+1. Customize the above renamed files.
+
+#### Server
+1. Create the directory you defined at `set :deploy_to`
+
+### Deploying
+
+1. `cd` to the AVH Deploy directory.
+1. Run `cap production deploy` (to deploy to staging, use `cap staging deploy`)
+
+### Rolling Back
+
+1. `cd` to the AVH Deploy directory.
+1. Run `cap production deploy:rollback`
+
+### About Stages
+
+There are two "stages": production and staging. These can be completely different servers, or different paths on the same set of servers.
+
+
+## Tasks
+In `lib/capistrano/tasks` there are several tasks defined you can use for the deployment process. The tasks have "documentation" in the files themselves.
+
+### Extra info
+ * This repository will be a rolling release, meaning we only use a master branch and we don't use tags.
+ * Even though the documentation and certain tasks are geared towards WordPress you can use AVH Deploy for more than WordPress
+
+## Licence
+
+The MIT License (MIT)
+
+Copyright (c) 2012-2013 Peter van der Does
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

@@ -1,0 +1,21 @@
+#
+# Tasks for dealing with the OPC cache
+#
+namespace :opc do
+	desc <<-DESC
+		Create a temporary PHP file to clear Zend Opcache cache, call it (using curl) and removes it
+		This task must be triggered AFTER the deployment to clear OPC cache.
+    Usage: after :finishing, 'opc:clear_cache'
+	DESC
+	task :clear_cache do
+		on roles(:app) do
+			opc_file = File.join(release_path, 'opc_clear.php')
+      opc_url = fetch(:url_base) +'/opc_clear.php'
+			curl_options = '-s'
+			opc_data = StringIO.new("<?php define('CACHEPREFIX',function_exists('opcache_reset')?'opcache_':(function_exists('accelerator_reset')?'accelerator_':'')); call_user_func(CACHEPREFIX.'reset'); ?>")
+			upload!( opc_data, opc_file, :mode => 0644)
+			execute :curl, curl_options, opc_url
+			execute :rm, '-f', opc_file
+		end
+	end
+end

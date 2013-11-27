@@ -1,0 +1,57 @@
+# CONTRIBUTING
+
+## When Submitting An Issue:
+
+If you think there's a bug, please make sure it's really a bug in AVH Deploy.
+As AVH Deploy sits on the (sometimes rough) edges between Capistrano, SSH, Git,
+the network, Ruby, RVM, rbenv, chruby, Bundler, your Linux distribution,
+countless shell configuration files on your end, and the server… there's a
+good chance the problem lies somewhere else.
+
+It's really important to include as much information as possible, versions of
+everything involved, anything weird you might be doing that might be having
+side effects, include as much as you can in a [GitHub
+Gist](https://gist.github.com/) and link that from the issue, with tools such
+as Gist, we can link to individual lines and help work out what is going wrong.
+
+## When Requesting a Feature:
+
+We can't make everyone happy all of the time, and we've been around the block
+well enough to know when something doesn't work well, or when your proposed fix
+might impact other things.
+
+Please don't be offended if we say no, and don't be afraid to fight your
+corner, try and avoid being one of the [poisonous
+people](https://www.youtube.com/watch?v=Q52kFL8zVoM)
+
+## Submitting A Pull Request:
+
+Pull requests are awesome, and if you conform to the guidelines below, we'll
+merge them in as soon as possible.
+
+ * Pull requests should be made from the `master` branch.
+ * The code is MIT licenced, your code will fall under the same license if we
+   merge it.
+ * We can't merge it without a [good commit
+   message](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message).
+   If you do this right, Github will use the commit message as the body of your
+   pull request, double win.
+ * If you are referencing an improvement to an existing issue (if we have not
+   yet merged it )
+ * If you add a new feature, please make sure to document it.
+ * Take care to squash your commit into one single commit with a good message,
+   it saves us a lot of work in maintaining the CHANGELOG if we can generate
+   it from the commit messages between the release tags!
+ * Tests! It's tricky to test but do your best.
+
+## Submitting a new tasks:
+
+Besides the general rule stated above for a Pull Request, please also adhere
+to the following guidelines:
+
+  * If you create a new task specifically for a certain OS, append the OS at
+    the end of the file name and namespace.
+  * Filenames should be lowercase only and the namespace should be the same
+    as the filename.
+  * Filenames should have the suffix `.cap` otherwise they won't be included
+    automatically by AVH Deploy
